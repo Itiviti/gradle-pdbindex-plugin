@@ -1,0 +1,43 @@
+plugins {
+    id 'nu.studer.plugindev' version '1.0.3'
+    id "com.jfrog.bintray" version "1.2"
+}
+
+group = 'com.ullink.gradle'
+
+apply plugin: 'groovy'
+
+description 'Gradle plugin for PDB indexing.'
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0', transitive: false
+    compile 'com.google.guava:guava:16.0.1'
+    compile 'commons-io:commons-io:2.4'
+}
+
+bintray {
+    // to remove when upgraded plugindev to 1.0.4
+    user project.properties.bintrayUser
+    key project.properties.bintrayApiKey
+    pkg.repo = 'gradle-plugins'
+    pkg.userOrg = 'ullink'
+    pkg.version.gpg.sign = true
+}
+
+plugindev {
+    pluginId 'com.ullink.pdbindex'
+    pluginName 'com.ullink.gradle:gradle-pdbindex-plugin'
+    pluginImplementationClass 'com.ullink.PdbIndexPlugin'
+    pluginDescription project.description
+    pluginLicenses 'Apache-2.0'
+    pluginTags 'gradle', 'plugin', 'pdb', 'c#', '.net'
+    authorId 'gluck'
+    authorName 'Francois Valdy'
+    authorEmail 'francois.valdy@gmail.com'
+    projectUrl "https://github.com/Ullink/${project.name}"
+    projectInceptionYear '2015'
+    done()
+}
+
+

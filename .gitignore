@@ -1,0 +1,15 @@
+/.gradle
+/.settings
+/build
+/bin
+/.idea
+*.iml
+.project
+.classpath
+/classes
+/.idea
+*.iml
+out/
+*.cache
+packages/
+.vs/
