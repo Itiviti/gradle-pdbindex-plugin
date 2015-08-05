@@ -1,4 +1,4 @@
-# Gradle PdbIndex Plugin [![Build status](https://ci.appveyor.com/api/projects/status/dx29ov4txa120okx/branch/master?svg=true)](https://ci.appveyor.com/project/gluck/gradle-pdbindex-plugin/branch/master) [![Build Status](https://travis-ci.org/Ullink/gradle-pbbindex-plugin.svg?branch=master)](https://travis-ci.org/Ullink/gradle-pdbindex-plugin)
+# Gradle PdbIndex Plugin [![Build status](https://ci.appveyor.com/api/projects/status/mn98qsdh8c8lq9gn/branch/master?svg=true)](https://ci.appveyor.com/project/gluck/gradle-pdbindex-plugin/branch/master) [![Build Status](https://travis-ci.org/Ullink/gradle-pdbindex-plugin.svg?branch=master)](https://travis-ci.org/Ullink/gradle-pdbindex-plugin)
 
 This plugin aims at working things around PDBs, mainly source indexing.
 
