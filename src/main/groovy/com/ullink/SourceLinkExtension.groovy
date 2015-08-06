@@ -17,9 +17,9 @@ class SourceLinkExtension {
             includeVersionInPath = false
             version = '1.0.0'
         }
-        project.tasks.sourceLinkIndexing {
-            dependsOn project.tasks.sourceLinkDownload
-            sourcelinkDir = "${project.tasks.sourceLinkDownload.outputDirectory}/SourceLink/tools"
+        project.tasks.withType(SourceLinkIndexing) {
+            it.dependsOn project.tasks.sourceLinkDownload
+            it.sourcelinkDir = "${project.tasks.sourceLinkDownload.outputDirectory}/SourceLink/tools"
         }
     }
 }
