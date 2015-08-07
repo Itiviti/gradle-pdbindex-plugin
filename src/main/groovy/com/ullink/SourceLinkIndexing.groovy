@@ -13,11 +13,17 @@ class SourceLinkIndexing extends ConventionTask {
     def commit
     def pdbFile
     def sourceFiles
+    def repo
+    def verifyGit
+    def verifyPdb
 
     SourceLinkIndexing() {
 
         conventionMapping.map "projectFile", { pdbFile ? null : project.tasks.findByPath('msbuild')?.mainProject?.projectFile }
         conventionMapping.map "properties", { project.tasks.findByPath('msbuild')?.initProperties }
+        conventionMapping.map "repo", { project.rootDir }
+        conventionMapping.map "verifyGit", { false }
+        conventionMapping.map "verifyPdb", { true }
 
         project.afterEvaluate {
             if (!url) return;
@@ -31,6 +37,9 @@ class SourceLinkIndexing extends ConventionTask {
     @TaskAction
     void run() {
         def args = [ "$sourcelinkDir/SourceLink.exe", 'index' ]
+        if (!getVerifyGit()) args += '-nvg'
+        if (!getVerifyPdb()) args += '-nvp'
+        if (getRepo()) args += [ '-r', getRepo() ]
         if (getProjectFile()) args += [ '-pr', getProjectFile() ]
         if (commit) args += [ '-c', commit]
         addArgs(args, '-p', pdbFile, { project.file(it) })

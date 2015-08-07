@@ -33,6 +33,11 @@ Sample usage:
       // git viewer raw URL, use '{0}' placeholder for GIT commit (SHA1) and '%var2%' for file path
       // Note that because of SRCSRV limitations, the url may not contain non-valid-windows-path characters (e.g. '?' won't work)
       url = "http://my-git-server/${project.name}/%var2%/raw/{0}"
+
+      // some other defaults, overwrite if needed, look for the param meaning in SourceLink
+      verifyGit = false
+      verifyPdb = true
+      repo = project.rootDir
     }
 
 # See also
