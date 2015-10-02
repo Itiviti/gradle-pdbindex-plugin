@@ -20,18 +20,36 @@ class SourceLinkIndexing extends ConventionTask {
     SourceLinkIndexing() {
 
         conventionMapping.map "projectFile", { pdbFile ? null : project.tasks.findByPath('msbuild')?.mainProject?.projectFile }
-        conventionMapping.map "properties", { project.tasks.findByPath('msbuild')?.initProperties }
+        conventionMapping.map "properties", {
+            def msbuild = getMsbuildTaskMatchingProject()
+            if (msbuild) {
+                def proj = msbuild.projects.values().find { it.projectFile == getProjectFile() }
+                // Configuration/Platform props are special and get remapped from sln->csproj
+                msbuild.initProperties + [ Configuration: proj.properties.Configuration, Platform: proj.properties.Platform ]
+            }
+        }
         conventionMapping.map "repo", { project.rootDir }
         conventionMapping.map "verifyGit", { false }
         conventionMapping.map "verifyPdb", { true }
 
         project.afterEvaluate {
             if (!url) return;
-            if (getProjectFile() && project.tasks.findByPath('msbuild')?.mainProject?.projectFile == getProjectFile()) {
-                dependsOn project.tasks.msbuild
-                project.tasks.msbuild.finalizedBy this
+            def msbuild = getMsbuildTaskMatchingProject()
+            if (msbuild) {
+                dependsOn msbuild
+                msbuild.finalizedBy this
             }
         }
+    }
+
+    def getMsbuildTaskMatchingProject() {
+        def projFile = getProjectFile()
+        if (projFile)
+            return project.tasks.withType(Msbuild.class).find {
+                it.projects.values().any {
+                    it.projectFile == projFile
+                }
+            }
     }
 
     @TaskAction
