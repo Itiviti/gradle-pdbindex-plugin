@@ -1,6 +1,7 @@
 plugins {
     id 'nu.studer.plugindev' version '1.0.3'
     id "com.jfrog.bintray" version "1.2"
+    id 'net.researchgate.release' version '2.3.4'
 }
 
 group = 'com.ullink.gradle'
@@ -42,4 +43,4 @@ plugindev {
     done()
 }
 
-
+project.tasks.afterReleaseBuild.dependsOn project.tasks.bintrayUpload
