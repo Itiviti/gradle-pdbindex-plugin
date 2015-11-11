@@ -1,6 +1,7 @@
 plugins {
     id 'nu.studer.plugindev' version '1.0.3'
     id "com.jfrog.bintray" version "1.2"
+    id 'net.researchgate.release' version '2.3.4'
 }
 
 group = 'com.ullink.gradle'
@@ -14,7 +15,7 @@ dependencies {
     testCompile group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0', transitive: false
     compile 'com.google.guava:guava:16.0.1'
     compile 'commons-io:commons-io:2.4'
-    compile 'com.ullink.gradle:gradle-nuget-plugin:2.10'
+    compile 'com.ullink.gradle:gradle-nuget-plugin:2.12'
     compile 'com.ullink.gradle:gradle-msbuild-plugin:2.11'
 }
 
@@ -42,4 +43,4 @@ plugindev {
     done()
 }
 
-
+project.tasks.afterReleaseBuild.dependsOn project.tasks.bintrayUpload

@@ -12,7 +12,8 @@ class SourceLinkExtension {
     def setupNugetDownload() {
         if (project.tasks.findByPath("sourceLinkDownload"))
             return;
-        project.apply plugin: 'nuget'
+
+        project.apply plugin: 'nuget-base'
         project.task(type: com.ullink.NuGetInstall, "sourceLinkDownload")
         project.tasks.sourceLinkDownload {
             packageId = 'sourcelink'
