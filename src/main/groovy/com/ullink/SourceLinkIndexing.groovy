@@ -28,7 +28,7 @@ class SourceLinkIndexing extends ConventionTask {
                 msbuild.initProperties + [ Configuration: proj.properties.Configuration, Platform: proj.properties.Platform ]
             }
         }
-        conventionMapping.map "repo", { project.rootDir }
+        conventionMapping.map "repo", { findRepoRootDir(project.rootDir) ?: project.rootDir }
         conventionMapping.map "verifyGit", { false }
         conventionMapping.map "verifyPdb", { true }
 
@@ -39,6 +39,12 @@ class SourceLinkIndexing extends ConventionTask {
                 dependsOn msbuild
                 msbuild.finalizedBy this
             }
+        }
+    }
+
+    File findRepoRootDir(File dir) {
+        if(dir) {
+            new File(dir, '.git').exists() ? dir : findRepoRootDir(dir.getParentFile())
         }
     }
 
