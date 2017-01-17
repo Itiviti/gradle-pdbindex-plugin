@@ -3,6 +3,7 @@ Plugin changelog
 
 1.6
 -------
+* Fixed an issue when sourcelink would have been run in a project which was not in the root of the git repository
 
 1.5
 -------
