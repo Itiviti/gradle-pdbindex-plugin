@@ -1,5 +1,8 @@
 Plugin changelog
 ====================
+1.7
+------
+* Default sourcelink version was updated to 1.1.0
 
 1.6
 -------
