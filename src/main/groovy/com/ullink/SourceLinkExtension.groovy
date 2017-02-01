@@ -19,7 +19,7 @@ class SourceLinkExtension {
             packageId = 'sourcelink'
             outputDirectory = temporaryDir
             includeVersionInPath = false
-            version = '1.0.0'
+            version = '1.1.0'
         }
         project.tasks.withType(SourceLinkIndexing) {
             it.dependsOn project.tasks.sourceLinkDownload
