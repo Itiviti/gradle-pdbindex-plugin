@@ -1,3 +1,6 @@
+### ⛔ DEPRECATED ⛔
+`msbuild` now supports sourcelink natively - [read the guide for enabling sourcelink in msbuild](https://github.com/dotnet/sourcelink/blob/master/README.md) to existing projects.
+
 # Gradle PdbIndex Plugin [![Build status](https://ci.appveyor.com/api/projects/status/mn98qsdh8c8lq9gn/branch/master?svg=true)](https://ci.appveyor.com/project/gluck/gradle-pdbindex-plugin/branch/master) [![Build Status](https://travis-ci.org/Ullink/gradle-pdbindex-plugin.svg?branch=master)](https://travis-ci.org/Ullink/gradle-pdbindex-plugin)
 
 This plugin aims at working things around PDBs, mainly source indexing.
