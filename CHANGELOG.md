@@ -1,12 +1,16 @@
 Plugin changelog
 ====================
+1.8
+------
+* Gradle 7 compatibility
+
 1.7
 ------
 * Default sourcelink version was updated to 1.1.0
 
 1.6
 -------
-* Fixed sourcelink root directory, when runnig in a project which was not in the root of the git repository
+* Fixed sourcelink root directory, when running in a project which was not in the root of the git repository
 
 1.5
 -------
