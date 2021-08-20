@@ -1,46 +1,41 @@
 plugins {
-    id 'nu.studer.plugindev' version '1.0.3'
-    id "com.jfrog.bintray" version "1.2"
-    id 'net.researchgate.release' version '2.3.4'
+    id 'com.gradle.plugin-publish' version '0.15.0'
+    id 'net.researchgate.release' version '2.8.0'
 }
 
 group = 'com.ullink.gradle'
 
+apply plugin: 'java-gradle-plugin'
 apply plugin: 'groovy'
+apply plugin: 'maven-publish'
 
 description 'Gradle plugin for PDB indexing.'
 
 dependencies {
-    testCompile 'junit:junit:4.11'
-    testCompile group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0', transitive: false
-    compile 'com.google.guava:guava:16.0.1'
-    compile 'commons-io:commons-io:2.4'
-    compile 'com.ullink.gradle:gradle-nuget-plugin:2.12'
-    compile 'com.ullink.gradle:gradle-msbuild-plugin:2.11'
+    testImplementation 'junit:junit:4.12'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.5'
+    implementation 'com.ullink.gradle:gradle-nuget-plugin:2.23'
 }
 
-bintray {
-    // to remove when upgraded plugindev to 1.0.4
-    user project.properties.bintrayUser
-    key project.properties.bintrayApiKey
-    pkg.repo = 'gradle-plugins'
-    pkg.userOrg = 'ullink'
-    pkg.version.gpg.sign = true
+pluginBundle {
+    website = 'https://github.com/Itiviti/gradle-pdbindex-plugin'
+    vcsUrl = 'https://github.com/Itiviti/gradle-pdbindex-plugin'
+    tags = ['pdb', 'c#', '.net']
+
+    mavenCoordinates {
+        groupId = 'com.ullink.gradle'
+    }
 }
 
-plugindev {
-    pluginId 'com.ullink.pdbindex'
-    pluginName 'com.ullink.gradle:gradle-pdbindex-plugin'
-    pluginImplementationClass 'com.ullink.PdbIndexPlugin'
-    pluginDescription project.description
-    pluginLicenses 'Apache-2.0'
-    pluginTags 'gradle', 'plugin', 'pdb', 'c#', '.net'
-    authorId 'gluck'
-    authorName 'Francois Valdy'
-    authorEmail 'francois.valdy@gmail.com'
-    projectUrl "https://github.com/Ullink/${project.name}"
-    projectInceptionYear '2015'
-    done()
+gradlePlugin {
+    plugins {
+        ikvmPlugin {
+            id = 'com.ullink.pdbindex'
+            description = project.description
+            displayName = 'Gradle PdbIndex Plugin'
+            implementationClass = 'com.ullink.PdbIndexPlugin'
+        }
+    }
 }
 
-project.tasks.afterReleaseBuild.dependsOn project.tasks.bintrayUpload
+afterReleaseBuild.dependsOn publishPlugins

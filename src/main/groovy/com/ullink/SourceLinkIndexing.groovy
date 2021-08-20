@@ -1,20 +1,31 @@
 package com.ullink
 
 import org.gradle.api.internal.ConventionTask
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 
 import java.lang.reflect.Array
 
 class SourceLinkIndexing extends ConventionTask {
+    @Internal
     def projectFile
+    @Internal
     def sourcelinkDir
+    @Internal
     def properties = [:]
+    @Internal
     def url
+    @Internal
     def commit
+    @Internal
     def pdbFile
+    @Internal
     def sourceFiles
+    @Internal
     def repo
+    @Internal
     def verifyGit
+    @Internal
     def verifyPdb
 
     SourceLinkIndexing() {
@@ -48,6 +59,7 @@ class SourceLinkIndexing extends ConventionTask {
         }
     }
 
+    @Internal
     def getMsbuildTaskMatchingProject() {
         def projFile = getProjectFile()
         if (projFile)
